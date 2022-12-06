@@ -66,13 +66,13 @@ function getMyUseState() {
     if (stateValues[stateIndex] === undefined) {
       stateValues[stateIndex] = initialVal;
     }
+    
+    // This works.  But I'll refact it for better readability (see below)
+    // const setStateForIndex = ((index) => (newValOrFunc: any) => setState(newValOrFunc, index))(stateIndex);
 
     // Closure function so we "lock in" the stateIndex to the respective state variable
     const getSetStateWithIndexAssigned = (index: number) => (newValOrFunc: any) => setState(newValOrFunc, index);
     
-    // This works.  But consider refactoring it for better readability
-    // const setStateForIndex = ((index) => (newValOrFunc: any) => setState(newValOrFunc, index))(stateIndex);
-
     console.log("In myUseState, stateValues: ", stateValues);
     
     return [stateValues[stateIndex], getSetStateWithIndexAssigned(stateIndex)];
